@@ -1,0 +1,623 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kagawa Yui | Portfolio</title>
+  <meta name="description" content="Kagawa Yuiのポートフォリオサイト" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --ink:#141018;
+      --muted: rgba(20,16,24,.62);
+      --line: rgba(20,16,24,.22);
+      --line2: rgba(20,16,24,.14);
+
+      --pink:#f3c3d1;
+      --mint:#bfe7d0;
+      --sky:#bcd8ff;
+
+      --shadow: 0 18px 60px rgba(0,0,0,.12);
+      --max: 1220px;
+      --grid: rgba(20,16,24,.06);
+
+      /* ✅ もくもく位置調整（必要ならここだけ触る） */
+      --blobTop: 50px;      /* +で下へ */
+      --blobWidth: 490px;   /* 表示サイズ（以前の70%スケール相当） */
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Noto Sans JP", system-ui, -apple-system, "Hiragino Sans", sans-serif;
+      color:var(--ink);
+      background:
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 28px 28px,
+        linear-gradient(0deg,  var(--grid) 1px, transparent 1px) 0 0 / 28px 28px,
+        var(--bg);
+      overflow-x:hidden;
+    }
+    a{color:inherit}
+    img{max-width:100%; display:block}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px;}
+
+    /* ===== Header ===== */
+    header{
+      position:sticky; top:0; z-index:60;
+      background: rgba(255,255,255,.86);
+      backdrop-filter: blur(14px);
+      border-bottom:1.5px solid var(--line);
+    }
+    .topbar{
+      display:grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items:center;
+      gap:14px;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex; align-items:flex-start; gap:12px;
+      text-decoration:none;
+      min-width: 220px;
+    }
+    .logoMark{width:78px; height:42px; display:grid; place-items:center;}
+    .logoMark svg{width:100%; height:auto; display:block;}
+    .brandText{line-height:1.05}
+    .brandText b{display:block; font-weight:900; letter-spacing:.08em; font-size:14px;}
+    .brandText span{display:block; margin-top:6px; font-weight:900; letter-spacing:.22em; font-size:11px; color:var(--muted);}
+
+    nav{
+      display:flex; gap:22px; align-items:flex-start; justify-content:center; flex-wrap:wrap;
+      padding:0 6px;
+    }
+    .navItem{
+      text-decoration:none;
+      display:flex; flex-direction:column; align-items:center; gap:4px;
+      padding:6px 6px; border-radius: 12px;
+    }
+    .navItem b{font-size:16px; font-weight:900; letter-spacing:.02em;}
+    .navItem span{font-size:11px; font-weight:800; color:var(--muted); letter-spacing:.10em;}
+    .navItem:hover{background: rgba(0,0,0,.03);}
+
+    
+
+
+
+    /* ===== Hero ===== */
+    .hero{ padding: 22px 0 22px; }
+    .stage{
+      position:relative;
+      min-height: 430px;
+      overflow: hidden;
+    }
+
+    /* ✅ 文章（前面） */
+    .stageInner{
+      position:relative;
+      z-index: 3;
+      display:grid;
+      grid-template-columns: minmax(320px, 1fr) var(--blobWidth) minmax(160px, 220px);
+      gap: 18px;
+      align-items:start;
+      padding: 24px 0 10px;
+    }
+
+    .intro{
+      position:relative;
+      padding: 8px 6px 0;
+      /* ✅ ここが“改行が変”の原因だったので撤廃（元の見え方に戻す） */
+      padding-right: 0;
+    }
+
+    .tagline{
+      display:inline-flex; align-items:center; gap:10px;
+      border:1.5px solid var(--line2);
+      background: rgba(255,255,255,.78);
+      border-radius:999px;
+      padding:10px 12px;
+      font-weight:900; letter-spacing:.02em;
+      box-shadow: 0 10px 28px rgba(0,0,0,.06);
+    }
+    .chips{display:inline-flex; gap:6px; align-items:center;}
+    .chip{width:12px;height:12px;border-radius:4px;border:1.2px solid rgba(20,16,24,.18)}
+    .chip.a{background: color-mix(in srgb, var(--mint) 70%, white 30%)}
+    .chip.b{background: color-mix(in srgb, var(--pink) 60%, white 40%)}
+    .chip.c{background: color-mix(in srgb, var(--sky) 65%, white 35%)}
+
+    h1{
+      margin:14px 0 12px;
+      font-size: clamp(32px, 4.6vw, 64px);
+      line-height:1.03;
+      letter-spacing:.01em;
+      font-weight:900;
+    }
+    .lead{
+      margin:0;
+      max-width: 60ch;
+      color:var(--muted);
+      font-size:15.5px;
+      line-height:2.05;
+      font-weight:700;
+    }
+    .actions{
+      margin-top: 18px;
+      display:flex; flex-wrap:wrap; gap:10px; align-items:center;
+    }
+    .btn{
+      text-decoration:none;
+      border:1.6px solid var(--line);
+      background: rgba(255,255,255,.82);
+      border-radius: 999px;
+      padding:12px 16px;
+      font-weight:900;
+      box-shadow: 0 12px 30px rgba(0,0,0,.10);
+      transition:.18s transform;
+      display:inline-flex; gap:10px; align-items:center;
+    }
+    .btn:hover{transform: translateY(-2px)}
+    .btn.primary{background: rgba(20,16,24,.92); color:#fff; border-color: rgba(20,16,24,.92);}
+    .btn .miniDot{
+      width:10px; height:10px; border-radius:999px;
+      background: rgba(20,16,24,.65);
+      box-shadow: 0 0 0 6px rgba(255,255,255,.50);
+    }
+
+    .sideCopy{
+      position:relative;
+      display:flex;
+      align-items:flex-start;
+      justify-content:flex-end;
+      padding-top: 12px;
+      z-index: 3;
+    }
+    .vText{
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      font-weight:900;
+      letter-spacing:.20em;
+      font-size: 28px;
+      line-height:1.2;
+      border-left: 1.8px solid var(--line);
+      padding-left: 18px;
+      margin-left: auto;
+      background: rgba(255,255,255,.35);
+    }
+    .vText small{
+      display:block;
+      margin-top: 10px;
+      font-size: 14px;
+      letter-spacing:.22em;
+      color: rgba(20,16,24,.70);
+      font-weight:900;
+    }
+
+    /* ✅ もくもく（メインビジュアル） */
+    .heroArt{
+      position:relative;
+      width: var(--blobWidth);
+      margin-top: var(--blobTop);
+      justify-self: end;
+      align-self: start;
+      z-index: 2;
+      pointer-events:none;
+    }
+
+    .flowerWrap{width: 100%; position:relative;}
+    .flower{
+      border-radius: 30px;
+      background: rgba(255,255,255,.70);
+      border: 5px solid rgba(0,0,0,.85);
+      box-shadow: var(--shadow);
+      padding: 12px;
+    }
+    .flowerFrame{
+      border-radius: 22px;
+      overflow:hidden;
+      border: 1.5px solid rgba(20,16,24,.14);
+      background:#fff;
+    }
+    .flowerFrame img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .flowerSvg{width:100%; height:auto; display:block;}
+
+
+    /* ===== sections ===== */
+    .section{ padding: 5px 0; }
+    .sectionHead{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+      margin-bottom: 12px;
+    }
+    .sectionHead b{font-size:18px; font-weight:900; letter-spacing:.18em;}
+    .sectionHead a{
+      text-decoration:none;
+      font-weight:900;
+      font-size:13px;
+      color:var(--muted);
+      border-bottom:1px solid rgba(20,16,24,.22);
+      padding-bottom:2px;
+    }
+
+    .cards{display:grid; grid-template-columns: repeat(12, 1fr); gap:12px;}
+    .card{
+      grid-column: span 4;
+      border: 1.7px solid var(--line);
+      background: rgba(255,255,255,.80);
+      border-radius: 18px;
+      box-shadow: 0 18px 60px rgba(0,0,0,.10);
+      overflow:hidden;
+      text-decoration:none;
+      transition:.18s transform;
+    }
+    .card:hover{transform: translateY(-2px)}
+    .thumb{
+      height: 190px;
+      border-bottom: 1.4px solid rgba(20,16,24,.12);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,.95), rgba(255,255,255,.65) 45%, rgba(0,0,0,.06) 85%),
+        linear-gradient(135deg, rgba(255,255,255,.92), rgba(255,255,255,.64));
+      display:grid;
+      place-items:center;
+      font-weight:900;
+      letter-spacing:.10em;
+      color: rgba(20,16,24,.55);
+    }
+    .cardBody{padding:14px}
+    .title{font-weight:900; font-size:16px; letter-spacing:.01em;}
+    .desc{margin-top:6px; color:var(--muted); font-size:13.5px; line-height:1.9; font-weight:700;}
+    .tag{
+      margin-top:10px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1.5px solid rgba(20,16,24,.16);
+      background: rgba(255,255,255,.88);
+      font-weight:900;
+      font-size:12px;
+      color: rgba(20,16,24,.70);
+    }
+    .tag i{
+      width:10px;height:10px;border-radius:999px;
+      background: color-mix(in srgb, var(--sky) 55%, white 45%);
+      border:1px solid rgba(20,16,24,.16);
+      display:inline-block;
+    }
+
+    footer{
+      border-top:1.6px solid var(--line);
+      padding:22px 0 44px;
+      color:var(--muted);
+      font-weight:800;
+      font-size:13px;
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top: 18px;
+      background: rgba(255,255,255,.60);
+    }
+    .footLinks{display:flex; gap:14px; flex-wrap:wrap}
+    .footLinks a{
+      text-decoration:none;
+      color:var(--muted);
+      border-bottom:1px solid transparent;
+      padding-bottom:2px;
+    }
+    .footLinks a:hover{border-bottom-color: rgba(20,16,24,.22); color: rgba(20,16,24,.80);}
+
+    /* ===== Responsive ===== */
+    @media (max-width: 1180px){
+      .stageInner{
+        grid-template-columns: 1fr;
+      }
+      .heroArt{
+        width: 100%;
+        margin-top: 14px;
+      }
+      .sideCopy{
+        display:flex;
+        padding-top: 12px;
+      }
+      .vText{
+        writing-mode: horizontal-tb;
+        border-left:none;
+        padding-left:0;
+        border-top:1.8px solid var(--line);
+        padding-top:14px;
+        letter-spacing:.08em;
+      }
+    }
+    @media (max-width: 980px){
+      .topbar{grid-template-columns: 1fr 1fr; grid-auto-rows:auto}
+      nav{display:none}
+
+      .stage{overflow: visible;}
+      .stageInner{grid-template-columns: 1fr}
+      .heroArt{
+        width: 100%;
+        margin-top: 14px;
+      }
+      .vText{
+        writing-mode: horizontal-tb;
+        border-left:none;
+        padding-left:0;
+        border-top:1.8px solid var(--line);
+        padding-top:14px;
+        letter-spacing:.08em;
+      }
+      .card{grid-column: span 6}
+    }
+    @media (max-width: 640px){
+      .topbar{padding:10px 0}
+      .brand{gap:8px; min-width:auto}
+      .logoMark{width:60px; height:34px}
+      .brandText b{font-size:12px}
+      .brandText span{font-size:10px; letter-spacing:.18em}
+  
+      .hero{padding:14px 0 20px}
+      h1{font-size: clamp(28px, 9vw, 40px)}
+      .lead{font-size:14px; line-height:1.9}
+      .tagline{font-size:12px; padding:8px 10px; flex-wrap:wrap}
+      .actions{flex-direction:column; align-items:stretch}
+      .btn{width:100%; justify-content:center}
+      .vText{font-size:20px}
+      .flower{padding:8px; border-width:4px}
+      .flowerFrame{border-radius:18px; aspect-ratio: 16 / 10}
+      .card{grid-column: span 12}
+    }
+    
+    html{
+     scroll-behavior: smooth; /* スライド（なめらか移動） */
+     }
+
+    #top{
+     scroll-margin-top: 120px; /* headerの高さと同じでOK */}
+    /* WORKSに飛んだとき、上の固定ヘッダー分だけ下にずらす */
+    #works{
+     scroll-margin-top: 120px; /* ← ここを 90〜140px で調整 */
+     }
+
+    /* ===== Works thumbnails (作品ごと) ===== */
+   .thumb{
+     height: 190px;
+     background-size: cover;
+     background-position: center;
+     background-repeat: no-repeat;
+     }
+    .thumb--01{ 
+      background-image: url("images/01/tebemaru-1.jpg"); }
+    .thumb--02{ background-image: url("images/02/01.jpg"); }
+    .thumb--03{ background-image: url("images/03/01.jpg"); }
+
+  </style>
+</head>
+
+<body>
+  <div id="top"></div>
+  <header>
+    <div class="wrap">
+      <div class="topbar">
+        <a class="brand" href="./index.html" aria-label="トップへ">
+          <div class="logoMark" aria-hidden="true">
+            <svg width="78" height="42" viewBox="0 0 190 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="6" y="18" width="56" height="64" rx="18" fill="var(--mint)" stroke="rgba(20,16,24,.70)" stroke-width="4"/>
+              <rect x="62" y="18" width="56" height="64" rx="18" fill="var(--pink)" stroke="rgba(20,16,24,.70)" stroke-width="4"/>
+              <circle cx="154" cy="50" r="32" fill="var(--sky)" stroke="rgba(20,16,24,.70)" stroke-width="4"/>
+              <circle cx="154" cy="50" r="10" fill="white" stroke="rgba(20,16,24,.70)" stroke-width="4"/>
+            </svg>
+          </div>
+          <div class="brandText">
+            <b>加川 結唯</b>
+            <span>PORTFOLIO</span>
+          </div>
+        </a>
+
+        <nav aria-label="グローバルナビ">
+          <a class="navItem" href="./index.html"><b>Top</b><span>トップ</span></a>
+          <a class="navItem" href="./about.html"><b>About</b><span>わたし</span></a>
+          <a class="navItem" href="./works.html"><b>Works</b><span>作品</span></a>
+          <a class="navItem" href="#contact"><b>Contact</b><span>連絡</span></a>
+        </nav>
+
+
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="stage">
+
+          <!-- 文章（前面） -->
+          <div class="stageInner">
+            <div class="intro">
+              <div class="tagline">
+                <span class="chips" aria-hidden="true">
+                  <span class="chip a"></span><span class="chip b"></span><span class="chip c"></span>
+                </span>
+                <!--自分で入力・タグライン-->
+                <span>bright / friendlly / thoughtful</span>
+              </div>
+
+              <!--メインキャッチコピー-->
+              <h1>楽しく、<br>つながろう。</h1>
+              <p class="lead">
+                話すことが好きで、つい考えすぎてしまうこともある。<br>
+                それでも、人と向き合いながら何かをつくる時間が好き。
+              </p>
+
+            </div>
+
+            <!-- もくもく（メインビジュアル） -->
+            <div class="heroArt" aria-hidden="true">
+              <div class="flowerWrap">
+                <div class="flower">
+                  <div class="flowerFrame">
+                    <!--
+                    <svg class="flowerSvg"
+                        viewBox="0 0 1200 760"
+                        xmlns="http://www.w3.org/2000/svg"
+                        role="img"
+                        aria-label="メインビジュアル">
+                  -->
+
+                      <!-- 枠の中に写真をそのまま表示 -->
+                      <img src="images/mein/mein.jpg" x="0" y="0" width="1200" preserveAspectRatio="xMidYMid slice" />
+
+                      <!-- うっすら白い膜（不要ならこの行ごと削除OK） -->
+                      <rect
+                         x="0" y="0" width="1200" height="760"
+                         fill="rgba(255,255,255,.08)" />
+
+                    </svg>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <aside class="sideCopy">
+              <div class="vText">
+                話すことから、<br>はじめよう。
+                <small>ENJOY / CONNECT</small>
+              </div>
+            </aside>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="works">
+      <div class="wrap">
+        <div class="sectionHead">
+          <b>WORKS</b>
+          <a href="./works.html">MORE</a>
+        </div>
+
+        <!--作品　文字打ち込む-->
+        <div class="cards" aria-label="作品プレビュー">
+          <a class="card" href="./works/work-01.html">
+            <div class="thumb thumb--01"></div>
+            <div class="cardBody">
+              <div class="title">新アプリの企画　食べまる</div>
+              <div class="desc">自宅の食品在庫をテーマにしたアプリ企画</div>
+              <span class="tag"><i></i>APP PLANNING / UI DESIGN</span>
+            </div>
+          </a>
+
+          <a class="card" href="./works/work-02.html">
+            <div class="thumb thumb--02"></div>
+            <div class="cardBody">
+              <div class="title">LINE　機能拡張リデザイン</div>
+              <div class="desc">既存アプリに対する機能追加を含めたUIリデザイン</div>
+              <span class="tag"><i></i>APP REDESIGN / UI・UX DESIGN</span>
+            </div>
+          </a>
+
+          <a class="card" href="./works/work-03.html">
+            <div class="thumb thumb thumb--03"></div>
+            <div class="cardBody">
+              <div class="title">ビジュアルポスター制作</div>
+              <div class="desc">写真表現を軸に物語性を持たせたポスター制作</div>
+              <span class="tag"><i></i>CONCEPT POSTER / GRAPHIC DESIGN</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrap">
+        <div class="sectionHead">
+          <b>ABOUT</b>
+          <a href="./about.html">MORE</a>
+        </div>
+
+        <div style="
+          border:1.7px solid var(--line);
+          background: rgba(255,255,255,.82);
+          border-radius: 18px;
+          box-shadow: var(--shadow);
+          padding:16px;
+          display:grid;
+          grid-template-columns: 120px 1fr;
+          gap:14px;
+          align-items:center;">
+          <div style="
+            width:120px;height:120px;border-radius:999px;
+            border:1.7px solid rgba(20,16,24,.18);
+            background: color-mix(in srgb,rgb(251, 128, 190) 22%, white 78%);
+            display:grid;place-items:center;
+            font-weight:900;
+            font-size:56px;
+            color:rgba(20,16,24,.55);">
+            🍥
+          </div>
+          <div>
+            <!--About Me 自分で入力-->
+            <div style="font-weight:900;font-size:18px;letter-spacing:.02em;">加川 結唯</div>
+            <p style="margin:3px 0 0; line-height:2.0; color:var(--muted); font-weight:700;">
+              人と話すことが好きで、相手の気持ちや行動を想像しながら、やさしく伝わる表現を大切にしています。<br>
+              UIデザインやWeb制作を通して、人と人をつなぐ表現を目指しています。
+            </p>
+            <div style="margin-top:8px; font-size:12.5px; color:rgba(20,16,24,.55); font-weight:800;">
+              Skills：Figma / Illustrator / Photoshop / Adobe XD
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="wrap">
+        <div class="sectionHead">
+          <b>CONTACT</b>
+          <a href="mailto:vwpy30411@yahoo.co.jp">MAIL</a>
+        </div>
+
+        <div style="
+          border:1.7px solid var(--line);
+          background: rgba(255,255,255,.82);
+          border-radius: 18px;
+          box-shadow: var(--shadow);
+          padding:16px;
+          font-weight:800;
+          color:rgba(20,16,24,.62);
+          line-height:2.0;">
+          Email：<a href="mailto:vwpy30411@yahoo.co.jp">qvwpy30411@yahoo.co.jp</a><br>
+          Instagram：<a href="#" target="_blank" rel="noreferrer">@my_id</a><br>
+          X：<a href="#" target="_blank" rel="noreferrer">@my_id</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <footer>
+        <div>© <span id="year"></span> 加川 結唯</div>
+        <div class="footLinks">
+          <a href="#about">About</a>
+          <a href="#works">Works</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
